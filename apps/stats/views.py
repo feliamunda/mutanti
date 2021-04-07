@@ -16,7 +16,7 @@ class HumanStatsView(APIView):
             if count_human_dna == 0:
                 ratio = 0
             else:
-                ratio = "{:.2f}".format(count_mutant_dna / count_human_dna)
+                ratio = round((count_mutant_dna / count_human_dna),2)
             data = {"count_mutant_dna":count_mutant_dna, "count_human_dna":count_human_dna, "ratio":ratio}
             return Response(data, content_type="application/json")
         except:
