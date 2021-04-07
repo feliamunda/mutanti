@@ -1,4 +1,4 @@
-import  threading, logging, re
+import re
 from concurrent.futures import Future
 
 from rest_framework.response import Response
@@ -7,7 +7,6 @@ from rest_framework.views import APIView
 from .serializers import HumanSerializer
 from .models import Human
 
-logging.basicConfig(level=10)
 # Create your views here.
 class HumanView(APIView):
     serializer = HumanSerializer
@@ -25,7 +24,6 @@ class HumanView(APIView):
             status = 403
             data = {"dna": request.data['dna'], "mutant": False}   
             if is_valid_values(request.data['dna']):
-                logging.log(30,look_patterns(request.data['dna']))
                 if look_patterns(request.data['dna']):
                     status = 200
                     data["mutant"] = True
@@ -81,7 +79,6 @@ def check_patterns(patterns):
     possible = 0
     found = 0
     position = 0
-    logging.debug(patterns)
     for n in patterns:
         while (position < len(n) - 1):
             if (not n[position + 1]):
