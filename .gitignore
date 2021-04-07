@@ -1,0 +1,10 @@
+# virtualenv
+pyvenv.cfg
+Scripts/
+Lib/
+
+# python
+__pycache__/
+
+#db
+db.sqlite3
