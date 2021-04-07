@@ -1,0 +1,26 @@
+version : '3.8'
+services:
+    mutants-api:
+        build:
+            context: ./
+            dockerfile: ./
+        tty: true
+        ports: 
+            - "3200:3200"
+        container_name: "mutants-api"
+        volumes:
+            - type: bind 
+              source: ./ 
+              target: /api
+
+        networks:
+            - mutants-network
+        environment:
+            DEBUG: 'true'
+        command: >
+            bash -c "python manage.py migrate
+            && python manage.py runserver 0.0.0.0:3200"
+
+networks:
+    mutants-network:
+        driver: bridge
